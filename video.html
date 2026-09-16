@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moni.med — Video 60.3s</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#F7FAF9;
+  --card:#FFFFFF;
+  --text:#3D4A4B;
+  --heading:#1E2C2E;
+  --border:#D7E3E1;
+  --turquoise:#0EA5B0;
+  --turquoise-strong:#0A7D86;
+  --turquoise-soft-text:#0A5A61;
+  --placeholder-bg:#EDEFEE;
+  --dark:#1E2C2E;
+  --dark-soft:#26383A;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+}
+
+body{
+  background:#101718;
+  font-family:'Work Sans',sans-serif;
+  color:var(--text);
+}
+
+.stage-wrapper{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.stage{
+  position:relative;
+  width:100%;
+  height:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:var(--bg);
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-track{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+  background:rgba(30,44,46,0.08);
+  z-index:100;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:var(--turquoise);
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.bg-decor{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.bg-decor .blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(2px);
+  opacity:.35;
+}
+
+.blob-a{
+  width:38%;
+  aspect-ratio:1;
+  background:
+    radial-gradient(
+      circle,
+      rgba(14,165,176,.16),
+      rgba(14,165,176,0) 70%
+    );
+  top:-10%;
+  left:-8%;
+  animation:drift-a 18s ease-in-out infinite;
+}
+
+.blob-b{
+  width:30%;
+  aspect-ratio:1;
+  background:
+    radial-gradient(
+      circle,
+      rgba(14,165,176,.14),
+      rgba(14,165,176,0) 70%
+    );
+  bottom:-12%;
+  right:-6%;
+  animation:drift-b 22s ease-in-out infinite;
+}
+
+@keyframes drift-a{
+  0%,100%{
+    transform:translate(0,0);
+  }
+
+  50%{
+    transform:translate(2%,3%);
+  }
+}
+
+@keyframes drift-b{
+  0%,100%{
+    transform:translate(0,0);
+  }
+
+  50%{
+    transform:translate(-2%,-3%);
+  }
+}
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+.scene{
+  position:absolute;
+  inset:0;
+  z-index:2;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  padding:4% 6%;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:
+    opacity 420ms ease;
+}
+
+.scene.scene-on{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Alternancia de fondos */
+
+.scene.light{
+  background:var(--bg);
+}
+
+.scene.light-alt{
+  background:#EEF5F3;
+}
+
+.scene.dark{
+  background:var(--dark);
+}
+
+.scene.dark-alt{
+  background:var(--dark-soft);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+.cue{
+  opacity:0;
+  will-change:transform,opacity,filter;
+}
+
+.cue.fx-fade{
+  transition:opacity 700ms ease-out;
+}
+
+.cue.fx-fade.show{
+  opacity:1;
+}
+
+.cue.fx-up{
+  transform:translateY(28px);
+  transition:
+    opacity 650ms ease-out,
+    transform 650ms cubic-bezier(.2,.8,.2,1);
+}
+
+.cue.fx-up.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.cue.fx-scale{
+  transform:scale(.82);
+  filter:blur(4px);
+
+  transition:
+    opacity 600ms ease-out,
+    transform 700ms cubic-bezier(.2,.8,.2,1),
+    filter 600ms ease-out;
+}
+
+.cue.fx-scale.show{
+  opacity:1;
+  transform:scale(1);
+  filter:blur(0);
+}
+
+.cue.fx-left{
+  transform:translateX(-46px);
+
+  transition:
+    opacity 600ms ease-out,
+    transform 650ms cubic-bezier(.2,.8,.2,1);
+}
+
+.cue.fx-left.show{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.cue.fx-right{
+  transform:translateX(46px);
+
+  transition:
+    opacity 600ms ease-out,
+    transform 650ms cubic-bezier(.2,.8,.2,1);
+}
+
+.cue.fx-right.show{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.cue.fx-blur-pop{
+  transform:scale(1.06);
+  filter:blur(8px);
+
+  transition:
+    opacity 420ms ease-out,
+    transform 480ms cubic-bezier(.2,.8,.2,1),
+    filter 420ms ease-out;
+}
+
+.cue.fx-blur-pop.show{
+  opacity:1;
+  transform:scale(1);
+  filter:blur(0);
+}
+
+/* =========================================================
+   SCENE 1
+========================================================= */
+
+.logo-row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:26px;
+}
+
+.logo-mark-lg{
+  width:84px;
+  height:84px;
+  object-fit:contain;
+}
+
+.wordmark{
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:52px;
+  color:var(--heading);
+  letter-spacing:-.01em;
+}
+
+.tagline-1{
+  font-family:'Sora',sans-serif;
+  font-weight:600;
+  font-size:30px;
+  color:var(--heading);
+  max-width:920px;
+  line-height:1.3;
+  text-align:center;
+}
+
+.pill-row{
+  display:flex;
+  gap:14px;
+  margin-top:28px;
+}
+
+.pill{
+  font-family:'Work Sans',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+
+  color:var(--turquoise-soft-text);
+
+  border:1.5px solid var(--turquoise);
+  padding:8px 22px;
+  border-radius:9999px;
+
+  background:rgba(14,165,176,.06);
+}
+
+/* =========================================================
+   SCENE 2
+========================================================= */
+
+.big-line{
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  font-size:42px;
+  color:var(--heading);
+  line-height:1.25;
+}
+
+.device-duo{
+  display:flex;
+  align-items:center;
+  gap:34px;
+  margin-top:38px;
+}
+
+.device-outline{
+  border:2.5px solid var(--heading);
+  border-radius:12px;
+  opacity:.85;
+}
+
+.laptop-outline{
+  width:150px;
+  height:96px;
+  position:relative;
+}
+
+.laptop-outline::after{
+  content:"";
+
+  position:absolute;
+  left:50%;
+  bottom:-14px;
+
+  transform:translateX(-50%);
+
+  width:190px;
+  height:8px;
+
+  border-radius:0 0 6px 6px;
+  border:2.5px solid var(--heading);
+  border-top:none;
+}
+
+.phone-outline{
+  width:58px;
+  height:110px;
+  border-radius:16px;
+}
+
+.pulse-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+
+  background:var(--turquoise);
+
+  animation:pulse-grow 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse-grow{
+  0%,100%{
+    transform:scale(.7);
+    opacity:.5;
+  }
+
+  50%{
+    transform:scale(1.15);
+    opacity:1;
+  }
+}
+
+/* =========================================================
+   SCENE 3
+   MOBILE
+========================================================= */
+
+.mobile-layout{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:7%;
+
+  transform:translateX(3%);
+}
+
+.device-frame{
+  position:relative;
+
+  background:var(--heading);
+
+  border-radius:22px;
+  padding:14px;
+
+  box-shadow:
+    0 24px 60px rgba(30,44,46,.28);
+
+  flex-shrink:0;
+}
+
+.device-frame.phone{
+  width:min(20vw,240px);
+  aspect-ratio:9/19.5;
+
+  border-radius:34px;
+  padding:12px 10px;
+}
+
+.device-frame.phone::before{
+  content:"";
+
+  position:absolute;
+
+  top:20px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:34%;
+  height:6px;
+
+  border-radius:4px;
+
+  background:rgba(255,255,255,.25);
+}
+
+.side-captions{
+  position:relative;
+
+  width:min(34%,400px);
+  height:220px;
+
+  flex-shrink:0;
+}
+
+.caption-side{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+
+  text-align:left;
+
+  font-family:'Sora',sans-serif;
+  font-weight:600;
+  font-size:26px;
+  line-height:1.35;
+
+  color:var(--heading);
+}
+
+/* =========================================================
+   SCENE 4
+   TABLET / DESKTOP
+   NUEVA COMPOSICIÓN
+========================================================= */
+
+.tablet-layout{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0, 58%)
+    minmax(320px, 42%);
+
+  align-items:center;
+
+  padding:
+    5% 4%
+    4% 2%;
+}
+
+/*
+  El dispositivo queda abajo y a la izquierda.
+  No se centra verticalmente.
+*/
+
+.tablet-device-area{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+
+  padding-left:3%;
+  padding-bottom:1%;
+}
+
+/*
+  El texto ocupa la columna derecha.
+  Esto evita que el dispositivo se cruce con el mensaje.
+*/
+
+.tablet-captions{
+  position:relative;
+
+  width:100%;
+  height:280px;
+
+  display:flex;
+  align-items:center;
+
+  padding:
+    0 5% 0 2%;
+
+  z-index:5;
+}
+
+.caption-tablet{
+  position:absolute;
+
+  width:100%;
+
+  display:flex;
+  align-items:center;
+
+  text-align:left;
+
+  font-family:'Sora',sans-serif;
+  font-weight:600;
+
+  font-size:28px;
+  line-height:1.35;
+
+  color:var(--heading);
+}
+
+/*
+  Tablet ligeramente más pequeña y más abajo.
+*/
+
+.device-frame.tablet{
+  width:min(53vw,820px);
+  aspect-ratio:16/9.4;
+
+  padding:12px;
+
+  border-radius:18px;
+
+  transform:
+    translate(-1%,5%);
+}
+
+.device-frame.tablet .device-screen{
+  border-radius:10px;
+}
+
+/* =========================================================
+   DEVICE SCREEN
+========================================================= */
+
+.device-screen{
+  width:100%;
+  height:100%;
+
+  border-radius:14px;
+  overflow:hidden;
+
+  background:var(--placeholder-bg);
+
+  position:relative;
+}
+
+.device-screen video{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+.placeholder-fill{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:6%;
+
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(14,165,176,.07) 0 10px,
+      rgba(14,165,176,.03) 10px 20px
+    );
+
+  border:2px dashed var(--turquoise);
+
+  border-radius:inherit;
+}
+
+.placeholder-fill p{
+  font-family:'Work Sans',sans-serif;
+  font-weight:600;
+  font-size:14px;
+
+  color:var(--turquoise-soft-text);
+
+  line-height:1.5;
+
+  margin:0;
+}
+
+.placeholder-fill .ratio-tag{
+  display:block;
+
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+
+  font-size:12px;
+
+  letter-spacing:.08em;
+
+  color:var(--turquoise-strong);
+
+  margin-bottom:6px;
+
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   SCENE 5
+========================================================= */
+
+.flash-icon{
+  width:56px;
+  height:56px;
+
+  margin:
+    0 auto 20px;
+
+  color:var(--turquoise);
+}
+
+.flash-text{
+  font-family:'Sora',sans-serif;
+  font-weight:600;
+
+  font-size:32px;
+
+  color:var(--heading);
+
+  max-width:820px;
+
+  line-height:1.3;
+
+  text-align:center;
+}
+
+.feature-flash{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:4% 8%;
+}
+
+/* =========================================================
+   SCENE 6
+   MENSAJE AI LIMPIO
+========================================================= */
+
+.ai-layout{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+}
+
+.ai-label{
+  font-family:'Work Sans',sans-serif;
+
+  font-weight:600;
+
+  font-size:16px;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+  color:#B9C9C8;
+
+  margin-bottom:18px;
+}
+
+.ai-title{
+  font-family:'Sora',sans-serif;
+
+  font-weight:700;
+
+  font-size:58px;
+
+  line-height:1.1;
+
+  color:var(--turquoise);
+
+  margin:0;
+
+  text-shadow:
+    0 0 40px rgba(14,165,176,.45);
+}
+
+.ai-description{
+  font-family:'Work Sans',sans-serif;
+
+  font-weight:400;
+
+  font-size:20px;
+
+  color:#B9C9C8;
+
+  max-width:700px;
+
+  margin-top:24px;
+
+  line-height:1.6;
+}
+
+/* =========================================================
+   SCENE 7
+========================================================= */
+
+.closing-cta{
+  margin-top:30px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  background:var(--turquoise);
+
+  color:#fff;
+
+  font-family:'Work Sans',sans-serif;
+
+  font-weight:700;
+
+  font-size:18px;
+
+  padding:14px 34px;
+
+  border-radius:12px;
+}
+
+.closing-sub{
+  margin-top:14px;
+
+  font-family:'Work Sans',sans-serif;
+
+  font-size:15px;
+
+  color:var(--text);
+
+  letter-spacing:.02em;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+  .tablet-layout{
+    grid-template-columns:55% 45%;
+    padding:4%;
+  }
+
+  .device-frame.tablet{
+    width:100%;
+  }
+
+  .caption-tablet{
+    font-size:23px;
+  }
+
+  .flash-text{
+    font-size:27px;
+  }
+
+  .ai-title{
+    font-size:45px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  .cue{
+    transition:none!important;
+  }
+
+  .blob-a,
+  .blob-b,
+  .pulse-dot{
+    animation:none!important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stage-wrapper">
+
+<div class="stage" id="stage">
+
+  <!-- BACKGROUND DECOR -->
+  <div class="bg-decor" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+  </div>
+
+
+  <!-- =====================================================
+       SCENE 1
+  ====================================================== -->
+
+  <section
+    class="scene scene-1 light"
+    data-start="0"
+    data-end="4300"
+  >
+
+    <div
+      class="logo-row cue fx-scale"
+      data-cue
+      data-on="200"
+      data-off="4000"
+    >
+
+      <img
+        class="logo-mark-lg"
+        src="logo_moni.med.png"
+        alt="Moni.med"
+      >
+
+      <span class="wordmark">
+        moni.med
+      </span>
+
+    </div>
+
+
+    <p
+      class="tagline-1 cue fx-up"
+      data-cue
+      data-on="900"
+      data-off="4000"
+    >
+      La primera plataforma de monitorización logística hospitalaria
+    </p>
+
+
+    <div
+      class="pill-row cue fx-up"
+      data-cue
+      data-on="1700"
+      data-off="4000"
+    >
+
+      <span class="pill">
+        Hospitales
+      </span>
+
+      <span class="pill">
+        Farmacias
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 2
+  ====================================================== -->
+
+  <section
+    class="scene scene-2 light-alt"
+    data-start="4100"
+    data-end="7300"
+  >
+
+    <p
+      class="big-line cue fx-up"
+      data-cue
+      data-on="4200"
+      data-off="7000"
+    >
+      Una sola plataforma.
+    </p>
+
+
+    <p
+      class="big-line cue fx-up"
+      data-cue
+      data-on="4900"
+      data-off="7000"
+      style="color:var(--turquoise-strong);"
+    >
+      Todo tu equipo, sincronizado.
+    </p>
+
+
+    <div
+      class="device-duo cue fx-fade"
+      data-cue
+      data-on="5400"
+      data-off="7000"
+    >
+
+      <div class="device-outline laptop-outline"></div>
+
+      <div class="pulse-dot"></div>
+
+      <div class="device-outline phone-outline"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 3
+  ====================================================== -->
+
+  <section
+    class="scene scene-3 light"
+    data-start="7100"
+    data-end="19380"
+  >
+
+    <div class="mobile-layout">
+
+      <div
+        class="device-frame phone cue fx-scale"
+        data-cue
+        data-on="7200"
+        data-off="19280"
+      >
+
+        <div
+          class="device-screen"
+          id="mobileScreen"
+        >
+
+          <div class="placeholder-fill">
+
+            <p>
+
+              <span class="ratio-tag">
+                Mobile · 9:16
+              </span>
+
+              Agenda quirúrgica
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="side-captions">
+
+        <p
+          class="caption-side cue fx-right"
+          data-cue
+          data-on="7900"
+          data-off="13300"
+        >
+          Moni AI ya conoce tu agenda quirúrgica
+        </p>
+
+
+        <p
+          class="caption-side cue fx-right"
+          data-cue
+          data-on="13600"
+          data-off="19100"
+        >
+          Arma la solicitud de medicamentos de esa cirugía. Solo falta tu aprobación.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 4
+       TABLET ABAJO IZQUIERDA
+       TEXTO DERECHA
+  ====================================================== -->
+
+  <section
+    class="scene scene-4 light-alt"
+    data-start="19180"
+    data-end="31610"
+  >
+
+    <div class="tablet-layout">
+
+
+      <!-- TABLET -->
+
+      <div class="tablet-device-area">
+
+        <div
+          class="device-frame tablet cue fx-left"
+          data-cue
+          data-on="19280"
+          data-off="31510"
+        >
+
+          <div
+            class="device-screen"
+            id="desktopScreen"
+          >
+
+            <div class="placeholder-fill">
+
+              <p>
+
+                <span class="ratio-tag">
+                  Desktop · 16:9
+                </span>
+
+                Pedidos · Inventario · Contratos
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TEXTO A LA DERECHA -->
+
+      <div class="tablet-captions">
+
+        <p
+          class="caption-tablet cue fx-right"
+          data-cue
+          data-on="19980"
+          data-off="25380"
+        >
+          Pedidos, inventario y contratos, en un solo lugar
+        </p>
+
+
+        <p
+          class="caption-tablet cue fx-right"
+          data-cue
+          data-on="25680"
+          data-off="31180"
+        >
+          Predicciones de consumo según tu agenda y tu stock real
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 5
+  ====================================================== -->
+
+  <section
+    class="scene scene-5 light"
+    data-start="31410"
+    data-end="44610"
+  >
+
+
+    <div
+      class="feature-flash cue fx-blur-pop"
+      data-cue
+      data-on="31510"
+      data-off="34610"
+    >
+
+      <svg
+        class="flash-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
+        <path d="M9 12l2 2 4-4"/>
+
+      </svg>
+
+      <p class="flash-text">
+        Roles y niveles de aprobación, como cada hospital los necesita
+      </p>
+
+    </div>
+
+
+    <div
+      class="feature-flash cue fx-blur-pop"
+      data-cue
+      data-on="34810"
+      data-off="37910"
+    >
+
+      <svg
+        class="flash-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path d="M18 8a6 6 0 0 0-12 0c0 5-2 6-2 6h16s-2-1-2-6"/>
+        <path d="M10 20a2 2 0 0 0 4 0"/>
+
+      </svg>
+
+      <p class="flash-text">
+        Alertas automáticas cuando algo empieza a faltar
+      </p>
+
+    </div>
+
+
+    <div
+      class="feature-flash cue fx-blur-pop"
+      data-cue
+      data-on="38110"
+      data-off="41210"
+    >
+
+      <svg
+        class="flash-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path d="M9 11l3 3L22 4"/>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+
+      </svg>
+
+      <p class="flash-text">
+        Contratos base, armados y listos para aprobar
+      </p>
+
+    </div>
+
+
+    <div
+      class="feature-flash cue fx-blur-pop"
+      data-cue
+      data-on="41410"
+      data-off="44510"
+    >
+
+      <svg
+        class="flash-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+
+        <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/>
+        <path d="M8 2v16"/>
+        <path d="M16 6v16"/>
+
+      </svg>
+
+      <p class="flash-text">
+        Trazabilidad total de cada movimiento
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 6
+       AI
+       SIN "NO ES UNA IA OPCIONAL"
+  ====================================================== -->
+
+  <section
+    class="scene scene-6 dark"
+    data-start="44410"
+    data-end="53610"
+  >
+
+    <div class="ai-layout">
+
+
+      <div
+        class="ai-label cue fx-up"
+        data-cue
+        data-on="44610"
+        data-off="53110"
+      >
+        Inteligencia integrada
+      </div>
+
+
+      <h2
+        class="ai-title cue fx-scale"
+        data-cue
+        data-on="46610"
+        data-off="53110"
+      >
+        Inteligencia que crece contigo.
+      </h2>
+
+
+      <p
+        class="ai-description cue fx-fade"
+        data-cue
+        data-on="49310"
+        data-off="53110"
+      >
+        Cada hospital, cada pedido y cada decisión alimentan un sistema más inteligente.
+      </p>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SCENE 7
+  ====================================================== -->
+
+  <section
+    class="scene scene-7 light-alt"
+    data-start="53410"
+    data-end="60310"
+  >
+
+    <div
+      class="logo-row cue fx-scale"
+      data-cue
+      data-on="53610"
+      data-off="60210"
+    >
+
+      <img
+        class="logo-mark-lg"
+        src="logo_moni.med.png"
+        alt="Moni.med"
+      >
+
+      <span class="wordmark">
+        moni.med
+      </span>
+
+    </div>
+
+
+    <div
+      class="closing-cta cue fx-up"
+      data-cue
+      data-on="55510"
+      data-off="60210"
+    >
+      Pide tu demo
+    </div>
+
+
+    <p
+      class="closing-sub cue fx-fade"
+      data-cue
+      data-on="56910"
+      data-off="60210"
+    >
+      Logística de medicamentos. Cada movimiento, con evidencia.
+    </p>
+
+  </section>
+
+
+  <!-- PROGRESS -->
+
+  <div class="progress-track">
+
+    <div
+      class="progress-fill"
+      id="progressFill"
+    ></div>
+
+  </div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   VIDEO SEQUENCES
+========================================================= */
+
+const MOBILE_SEQUENCE = [
+
+  {
+    src:"video/mobile1.mp4",
+    on:7200,
+    off:13230
+  },
+
+  {
+    src:"video/mobile2.mp4",
+    on:13230,
+    off:19280
+  }
+
+];
+
+
+const DESKTOP_SEQUENCE = [
+
+  {
+    src:"video/desktop1.mp4",
+    on:19280,
+    off:25480
+  },
+
+  {
+    src:"video/desktop2.mp4",
+    on:25480,
+    off:31510
+  }
+
+];
+
+
+const TOTAL_MS = 60310;
+
+
+/* =========================================================
+   VIDEO MOUNTING
+========================================================= */
+
+const videoSequences = [];
+
+
+function mountVideoSequence(containerId,sequence){
+
+  const container =
+    document.getElementById(containerId);
+
+  if(!container) return;
+
+
+  const placeholder =
+    container.querySelector('.placeholder-fill');
+
+  if(placeholder){
+    placeholder.remove();
+  }
+
+
+  sequence.forEach(item => {
+
+    const video =
+      document.createElement('video');
+
+    video.src = item.src;
+
+    video.muted = true;
+
+    video.playsInline = true;
+
+    video.preload = 'auto';
+
+    video.style.display = 'none';
+
+    container.appendChild(video);
+
+
+    videoSequences.push({
+
+      el:video,
+
+      on:item.on,
+
+      off:item.off
+
+    });
+
+  });
+
+}
+
+
+mountVideoSequence(
+  'mobileScreen',
+  MOBILE_SEQUENCE
+);
+
+
+mountVideoSequence(
+  'desktopScreen',
+  DESKTOP_SEQUENCE
+);
+
+
+/* =========================================================
+   CUES
+========================================================= */
+
+const cues =
+  Array.from(
+    document.querySelectorAll('[data-cue]')
+  ).map(el => ({
+
+    el,
+
+    on:
+      parseInt(
+        el.dataset.on,
+        10
+      ),
+
+    off:
+      parseInt(
+        el.dataset.off,
+        10
+      )
+
+  }));
+
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+const scenes =
+  Array.from(
+    document.querySelectorAll('.scene')
+  ).map(el => ({
+
+    el,
+
+    on:
+      parseInt(
+        el.dataset.start,
+        10
+      ),
+
+    off:
+      parseInt(
+        el.dataset.end,
+        10
+      )
+
+  }));
+
+
+const progressFill =
+  document.getElementById(
+    'progressFill'
+  );
+
+
+let startTime = null;
+
+let rafId = null;
+
+
+/* =========================================================
+   MAIN TIMELINE
+========================================================= */
+
+function tick(now){
+
+  if(startTime === null){
+
+    startTime = now;
+
+  }
+
+
+  const elapsed =
+    now - startTime;
+
+
+  /* SCENES */
+
+  scenes.forEach(scene => {
+
+    const active =
+      elapsed >= scene.on &&
+      elapsed < scene.off;
+
+    scene.el.classList.toggle(
+      'scene-on',
+      active
+    );
+
+  });
+
+
+  /* CUES */
+
+  cues.forEach(cue => {
+
+    const active =
+      elapsed >= cue.on &&
+      elapsed < cue.off;
+
+    cue.el.classList.toggle(
+      'show',
+      active
+    );
+
+  });
+
+
+  /* VIDEOS */
+
+  videoSequences.forEach(video => {
+
+    const active =
+      elapsed >= video.on &&
+      elapsed < video.off;
+
+
+    if(active){
+
+      video.el.style.display =
+        'block';
+
+
+      if(video.el.paused){
+
+        video.el.play()
+          .catch(() => {});
+
+      }
+
+    }else{
+
+      video.el.style.display =
+        'none';
+
+
+      if(!video.el.paused){
+
+        video.el.pause();
+
+      }
+
+    }
+
+  });
+
+
+  /* PROGRESS */
+
+  const pct =
+    Math.min(
+      100,
+      (elapsed / TOTAL_MS) * 100
+    );
+
+
+  progressFill.style.width =
+    pct + '%';
+
+
+  /* CONTINUE */
+
+  if(elapsed < TOTAL_MS){
+
+    rafId =
+      requestAnimationFrame(tick);
+
+  }
+
+}
+
+
+/* =========================================================
+   PLAY
+========================================================= */
+
+function playSequence(){
+
+  cancelAnimationFrame(rafId);
+
+
+  cues.forEach(cue => {
+
+    cue.el.classList.remove(
+      'show'
+    );
+
+  });
+
+
+  scenes.forEach(scene => {
+
+    scene.el.classList.remove(
+      'scene-on'
+    );
+
+  });
+
+
+  videoSequences.forEach(video => {
+
+    video.el.pause();
+
+    video.el.currentTime = 0;
+
+    video.el.style.display =
+      'none';
+
+  });
+
+
+  startTime = null;
+
+
+  progressFill.style.width =
+    '0%';
+
+
+  rafId =
+    requestAnimationFrame(tick);
+
+}
+
+
+/* =========================================================
+   AUTOPLAY
+========================================================= */
+
+window.addEventListener(
+  'load',
+  () => {
+
+    setTimeout(
+      playSequence,
+      300
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>
