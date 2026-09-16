@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moni.med — Sistema operativo para logística de medicamentos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap');
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;background:#071014;color:#f5fbfc;font-family:'DM Sans',sans-serif}
+  [data-composition-id="monimed"]{position:relative;width:1920px;height:1080px;overflow:hidden;background:#071014}
+  .video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,20,.86),rgba(4,16,20,.32) 65%,rgba(4,16,20,.12))}
+  .scene-content{position:absolute;inset:0;width:100%;height:100%;padding:112px 140px;display:flex;flex-direction:column;justify-content:center;gap:24px}
+  .eyebrow{font-size:24px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#45e0d0}
+  h1{font:700 82px/1.08 'Sora',sans-serif;letter-spacing:-.045em;max-width:1180px;margin:0}
+  .copy{font-size:34px;line-height:1.35;max-width:1050px;color:#e1eff0;margin:0}
+  .chips{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+  .chip{border:1px solid rgba(69,224,208,.65);background:rgba(7,29,34,.72);padding:16px 24px;border-radius:999px;font-size:23px;font-weight:600}
+  .brand{position:absolute;left:140px;top:66px;font:700 29px 'Sora',sans-serif;letter-spacing:-.03em}
+  .brand span{color:#45e0d0}
+  .interstitial{background:#071014}
+  .interstitial .scene-content{align-items:center;text-align:center;padding:130px 220px}
+  .interstitial h1{font-size:72px;max-width:1400px}
+  .interstitial .copy{font-size:30px}
+  .mono{filter:grayscale(1)}
+  .patient{background:#e9f7f5;color:#09272b}
+  .patient .veil{background:linear-gradient(90deg,rgba(233,247,245,.97),rgba(233,247,245,.78) 58%,rgba(233,247,245,.18))}
+  .patient .eyebrow{color:#078f86}
+  .patient h1{color:#09272b}
+  .patient .copy{color:#21494b}
+  .patient .chip{color:#063b3b;background:rgba(255,255,255,.78);border-color:#64cfc4}
+  .closing{background:#06171a}
+  .closing .scene-content{align-items:center;text-align:center;padding:120px 180px}
+  .closing h1{font-size:78px;max-width:1450px}
+  .closing .copy{max-width:1250px}
+  .cta{display:inline-block;margin-top:20px;background:#45e0d0;color:#052b2d;border-radius:999px;padding:22px 42px;font-size:27px;font-weight:700}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+</head>
+<body>
+<div data-composition-id="monimed" data-width="1920" data-height="1080" data-duration="60">
+  <video id="desktop1" class="video" src="video/desktop1.mp4" muted playsinline data-start="0" data-duration="12" data-track-index="0"></video>
+  <div id="veil1" class="veil" data-start="0" data-duration="12" data-track-index="1"></div>
+  <div id="phase1" class="scene-content" data-start="0" data-duration="12" data-track-index="2">
+    <div class="brand">moni<span>.med</span></div>
+    <div class="eyebrow">01 / Prevención</div>
+    <h1>Prevenimos glosas de medicamentos con AI.</h1>
+    <p class="copy">Monitoreamos y validamos cada proceso para anticipar inconsistencias antes de que se conviertan en glosas.</p>
+    <div class="chips"><span class="chip">Monitoreo inteligente</span><span class="chip">Validación automatizada</span></div>
+  </div>
+
+  <div id="bridge1" class="scene-content interstitial" data-start="12" data-duration="3" data-track-index="2">
+    <div class="eyebrow">Conectividad</div><h1>Nos integramos con tus sistemas clínicos internos.</h1>
+  </div>
+
+  <video id="mobile2" class="video mono" src="video/mobile2.mp4" muted playsinline data-start="15" data-duration="14" data-track-index="0"></video>
+  <div id="veil2" class="veil" data-start="15" data-duration="14" data-track-index="1"></div>
+  <div id="phase2" class="scene-content" data-start="15" data-duration="14" data-track-index="2">
+    <div class="brand">moni<span>.med</span></div>
+    <div class="eyebrow">02 / Operación conectada</div>
+    <h1>La logística, conectada en tiempo real.</h1>
+    <p class="copy">Conectamos a la IPS y la farmacia con chat, reportes y seguimiento de despachos y entregas en un solo flujo.</p>
+    <div class="chips"><span class="chip">Chat IPS ↔ Farmacia</span><span class="chip">Seguimiento de pedidos</span><span class="chip">Reportes de entrega</span></div>
+  </div>
+
+  <div id="bridge2" class="scene-content interstitial" data-start="29" data-duration="3" data-track-index="2">
+    <div class="eyebrow">Integración</div><h1>Conectamos también tus inventarios internos.</h1>
+  </div>
+
+  <video id="desktop2" class="video" src="video/desktop2.mp4" muted playsinline data-start="32" data-duration="14" data-track-index="0"></video>
+  <div id="veil3" class="veil" data-start="32" data-duration="14" data-track-index="1"></div>
+  <div id="phase3" class="scene-content" data-start="32" data-duration="14" data-track-index="2">
+    <div class="brand">moni<span>.med</span></div>
+    <div class="eyebrow">03 / Trazabilidad</div>
+    <h1>Defendemos las glosas con trazabilidad y evidencia.</h1>
+    <p class="copy">Cada pedido queda respaldado: verificamos contratos, documentamos movimientos y visualizamos el consumo mensual.</p>
+    <div class="chips"><span class="chip">Trazabilidad por pedido</span><span class="chip">Validación contractual</span><span class="chip">Consumo mensual</span></div>
+  </div>
+
+  <div id="bridge3" class="scene-content interstitial" data-start="46" data-duration="3" data-track-index="2">
+    <div class="eyebrow">Control financiero</div><h1>Conciliación de facturas. Métricas claras. Cada cifra, desglosada.</h1>
+  </div>
+
+  <div id="patient" class="patient" data-start="49" data-duration="7" data-track-index="2">
+    <div class="scene-content">
+      <div class="eyebrow">04 / Para pacientes</div>
+      <h1>Tu tratamiento no debería esperar a una crisis.</h1>
+      <p class="copy">Moni.ai conecta a pacientes con diabetes e hipertensión con su IPS para facilitar el acceso a medicamentos a domicilio cuando los necesitan.</p>
+      <p class="copy">El sufrimiento de la espera y el tiempo perdido pueden prevenirse.</p>
+    </div>
+  </div>
+
+  <div id="closing" class="closing" data-start="56" data-duration="4" data-track-index="2">
+    <div class="scene-content">
+      <div class="eyebrow">moni.med</div>
+      <h1>El sistema operativo para la logística de medicamentos con AI.</h1>
+      <p class="copy">Conectamos hospitales y farmacias para una operación más trazable, coordinada y eficiente.</p>
+      <div class="cta">Conoce Moni.med</div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({paused:true});
+    const enter = (sel, vars, at) => tl.from(sel, {...vars, immediateRender:false}, at);
+    enter("#phase1 .eyebrow",{y:24,opacity:0,duration:.55,ease:"power3.out"},.2);
+    enter("#phase1 h1",{y:48,opacity:0,duration:.8,ease:"expo.out"},.35);
+    enter("#phase1 .copy",{y:28,opacity:0,duration:.65,ease:"power2.out"},.7);
+    enter("#phase1 .chip",{y:18,opacity:0,duration:.45,stagger:.12,ease:"back.out(1.4)"},1);
+    enter("#bridge1 h1",{y:34,opacity:0,duration:.7,ease:"power3.out"},12.2);
+    enter("#bridge1 .eyebrow",{opacity:0,scale:.94,duration:.5,ease:"power2.out"},12.35);
+    enter("#phase2 .eyebrow",{x:-30,opacity:0,duration:.55,ease:"power3.out"},15.2);
+    enter("#phase2 h1",{y:42,opacity:0,duration:.75,ease:"expo.out"},15.35);
+    enter("#phase2 .copy",{y:25,opacity:0,duration:.6,ease:"power2.out"},15.7);
+    enter("#phase2 .chip",{y:20,opacity:0,duration:.45,stagger:.1,ease:"back.out(1.3)"},16);
+    enter("#bridge2 h1",{y:34,opacity:0,duration:.7,ease:"power3.out"},29.2);
+    enter("#bridge2 .eyebrow",{opacity:0,scale:.94,duration:.5,ease:"power2.out"},29.35);
+    enter("#phase3 .eyebrow",{x:-30,opacity:0,duration:.55,ease:"power3.out"},32.2);
+    enter("#phase3 h1",{y:42,opacity:0,duration:.75,ease:"expo.out"},32.35);
+    enter("#phase3 .copy",{y:25,opacity:0,duration:.6,ease:"power2.out"},32.7);
+    enter("#phase3 .chip",{y:20,opacity:0,duration:.45,stagger:.1,ease:"back.out(1.3)"},33);
+    enter("#bridge3 h1",{y:34,opacity:0,duration:.7,ease:"power3.out"},46.2);
+    enter("#bridge3 .eyebrow",{opacity:0,scale:.94,duration:.5,ease:"power2.out"},46.35);
+    enter("#patient h1",{y:38,opacity:0,duration:.7,ease:"expo.out"},49.25);
+    enter("#patient .eyebrow",{opacity:0,x:-25,duration:.5,ease:"power3.out"},49.2);
+    enter("#patient .copy",{y:24,opacity:0,duration:.6,stagger:.2,ease:"power2.out"},49.65);
+    enter("#closing .eyebrow",{opacity:0,scale:.9,duration:.5,ease:"power2.out"},56.2);
+    enter("#closing h1",{y:42,opacity:0,duration:.8,ease:"expo.out"},56.35);
+    enter("#closing .copy",{y:24,opacity:0,duration:.6,ease:"power2.out"},56.7);
+    enter("#closing .cta",{y:18,opacity:0,scale:.96,duration:.55,ease:"back.out(1.5)"},57.1);
+    window.__timelines["monimed"] = tl;
+  </script>
+</div>
+</body>
+</html>
