@@ -170,20 +170,12 @@
     width:100%;
     overflow:hidden;
   }
-  .hero-video::after{
-    content:'';
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    height:55%;
-    background:linear-gradient(to bottom, rgba(247,250,249,0) 0%, var(--bg) 100%);
-    pointer-events:none;
-    z-index:1;
-  }
+  
   .hero-frame{
     width:100%;
-    height:min(62vh, 560px);
+    aspect-ratio:16/9;
+    height:auto;
+    max-height:560px;
     display:block;
     border:0;
     pointer-events:none;
@@ -191,7 +183,7 @@
   .hero-title{
     position:relative;
     z-index:3;
-    margin-top:-64px;
+    margin-top:24px;
     padding-bottom:40px;
     text-align:left;
   }
@@ -279,35 +271,56 @@
   .process-track{
     display:flex;
     align-items:flex-start;
-    position:relative;
-  }
-  /* One continuous line, behind every icon. The line is owned by the track
-     instead of each step, so it can never paint over a neighboring icon. */
-  .process-track::before{
-    content:'';
-    position:absolute;
-    left:10%;
-    right:10%;
-    top:37px;
-    height:2px;
-    background:var(--turquoise);
-    z-index:0;
-    pointer-events:none;
   }
   .process-step{
     flex:1;
     position:relative;
     text-align:center;
-    padding:0 10px;
-    z-index:1;
+    padding:16px 12px 18px;
+  }
+  .process-step::before{
+    content:'';
+    position:absolute;
+    inset:6px 4px;
+    background:var(--turquoise-strong);
+    border-radius:16px;
+    opacity:0;
+    transform:scale(0.94);
+    transition:opacity 200ms ease-out, transform 200ms ease-out;
+    z-index:0;
   }
   .process-step .connector{
-    display:none;
+    position:absolute;
+    top:64px;
+    left:-50%;
+    width:100%;
+    height:2px;
+    background:var(--border);
+    z-index:-1;
+    overflow:hidden;
   }
+  .process-step.done .connector, .process-step.current .connector{background:var(--turquoise);}
+  .process-step:first-child .connector{display:none;}
+  .process-step .connector::after{
+    content:'';
+    position:absolute;
+    top:-3px;
+    left:0;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--turquoise-strong);
+    box-shadow:0 0 0 4px rgba(14,165,176,0.18);
+    opacity:0;
+    animation:travel 10s ease-in-out infinite;
+  }
+  .process-step:nth-child(2) .connector::after{animation-delay:-8.4s;}
+  .process-step:nth-child(3) .connector::after{animation-delay:-6.4s;}
+  .process-step:nth-child(4) .connector::after{animation-delay:-4.4s;}
+  .process-step:nth-child(5) .connector::after{animation-delay:-2.4s;}
 
   .step-icon{
     position:relative;
-    z-index:3;
+    z-index:2;
     width:52px;height:52px;
     margin:0 auto 16px;
     border-radius:50%;
@@ -321,21 +334,21 @@
   }
   .step-icon svg{width:24px;height:24px;}
   .process-step.done .step-icon{
-    background:var(--placeholder-bg);
-    border-color:var(--border);
-    color:#9DAEAC;
+    background:rgba(14,165,176,0.10);
+    border-color:rgba(14,165,176,0.35);
+    color:var(--turquoise-strong);
   }
   .process-step.current .step-icon{
-    background:var(--placeholder-bg);
-    border-color:var(--border);
-    color:#9DAEAC;
+    background:var(--turquoise);
+    border-color:var(--turquoise);
+    color:#fff;
   }
   .process-step .step-icon::after{
     content:'';
     position:absolute;
     inset:-6px;
     border-radius:50%;
-    border:2px solid #fff;
+    border:2px solid var(--turquoise);
     opacity:0;
   }
 
@@ -346,6 +359,8 @@
     color:var(--heading);
     margin:0 0 6px;
     transition:font-size 260ms ease-out, color 260ms ease-out, text-shadow 260ms ease-out;
+    position:relative;
+    z-index:2;
   }
   .step-text{
     margin:0;
@@ -353,127 +368,68 @@
     line-height:1.5;
     color:var(--text);
     transition:font-size 260ms ease-out, color 260ms ease-out;
+    position:relative;
+    z-index:2;
   }
   .ai-tag{
     color:var(--turquoise-strong);
     font-weight:700;
   }
 
-  .process-step .ai-tag{
-    transition:color 320ms ease;
-  }
-
-  @keyframes ai-tag-focus{
-    0%, 12%, 100%{color:var(--turquoise-strong);}
-    3%, 10%{color:#fff;}
-  }
-
-  .process-step .ai-tag{animation:ai-tag-focus 10s ease-in-out infinite;}
-
   /* Focus that cycles through the five steps, in order */
-  .process-step{
-    animation:step-focus 10s ease-in-out infinite;
-    border-radius:16px;
-    padding:12px 10px 14px;
-    margin:-12px 0 -14px;
-    transition:background 320ms ease, box-shadow 320ms ease, transform 320ms ease;
-  }
-
-  .process-step .step-icon{
-    transition:background 320ms ease, color 320ms ease, border-color 320ms ease,
-      box-shadow 320ms ease, transform 320ms ease;
-  }
-
+  .process-step{animation:step-ring 10s ease-in-out infinite;}
+  .process-step::before{animation:card-focus 10s ease-in-out infinite;}
   .process-step .step-icon{animation:icon-focus 10s ease-in-out infinite;}
-
-  .process-step .step-icon::after{
-    animation:ring-pulse 10s ease-in-out infinite;
-  }
-
-  .process-step .step-label,
-  .process-step .step-text{
-    transition:color 320ms ease, text-shadow 320ms ease, transform 320ms ease;
-  }
-
+  .process-step .step-icon::after{animation:ring-pulse 10s ease-in-out infinite;}
   .process-step .step-label{animation:label-focus 10s ease-in-out infinite;}
   .process-step .step-text{animation:text-focus 10s ease-in-out infinite;}
-
-  .process-step:nth-child(1),
   .process-step:nth-child(1) *{animation-delay:0s;}
-  .process-step:nth-child(2),
   .process-step:nth-child(2) *{animation-delay:-8s;}
-  .process-step:nth-child(3),
   .process-step:nth-child(3) *{animation-delay:-6s;}
-  .process-step:nth-child(4),
   .process-step:nth-child(4) *{animation-delay:-4s;}
-  .process-step:nth-child(5),
   .process-step:nth-child(5) *{animation-delay:-2s;}
+  .process-step:nth-child(1){animation-delay:0s;}
+  .process-step:nth-child(2){animation-delay:-8s;}
+  .process-step:nth-child(3){animation-delay:-6s;}
+  .process-step:nth-child(4){animation-delay:-4s;}
+  .process-step:nth-child(5){animation-delay:-2s;}
 
-  /* The turquoise rectangle exists only while a step is focused. */
-  @keyframes step-focus{
-    0%, 12%, 100%{
-      background:transparent;
-      box-shadow:none;
-      transform:translateY(0);
-    }
-    3%, 10%{
-      background:var(--turquoise);
-      box-shadow:0 12px 28px rgba(14,165,176,0.22);
-      transform:translateY(-2px);
-    }
+  @keyframes status-pulse{
+    0%{transform:scale(0.7);opacity:0.55;}
+    70%{transform:scale(2.1);opacity:0;}
+    100%{transform:scale(2.1);opacity:0;}
   }
-
-  @keyframes ring-pulse{
-    0%, 12%, 100%{transform:scale(0.9);opacity:0;}
-    2%{transform:scale(0.9);opacity:0.7;}
-    16%{transform:scale(1.3);opacity:0;}
+  @keyframes travel{
+    0%,100%{left:0%;opacity:0;}
+    4%{opacity:1;}
+    16%{left:calc(100% - 8px);opacity:1;}
+    20%{opacity:0;}
   }
-
+  @keyframes card-focus{
+    0%,18%,100%{opacity:0;transform:scale(0.94);}
+    4%{opacity:1;transform:scale(1.08);}
+    14%{opacity:1;transform:scale(1.08);}
+  }
   @keyframes icon-focus{
-    0%, 12%, 100%{
-      background:var(--placeholder-bg);
-      border-color:var(--border);
-      color:#9DAEAC;
-      box-shadow:none;
-      transform:translateY(0) scale(1);
-    }
-    3%, 10%{
-      background:#fff;
-      border-color:#fff;
-      color:var(--turquoise);
-      box-shadow:0 0 0 2px rgba(14,165,176,0.18), 0 8px 18px rgba(14,165,176,0.18);
-      transform:translateY(-1px) scale(1.03);
-    }
+    0%,18%,100%{transform:scale(1);background:var(--placeholder-bg);border-color:var(--border);color:#9DAEAC;box-shadow:none;}
+    4%{transform:scale(1.18);background:var(--turquoise-strong);border-color:var(--turquoise-strong);color:#fff;box-shadow:0 10px 24px rgba(10,125,134,0.35);}
+    14%{transform:scale(1.18);background:var(--turquoise-strong);border-color:var(--turquoise-strong);color:#fff;box-shadow:0 10px 24px rgba(10,125,134,0.35);}
   }
-
+  @keyframes ring-pulse{
+    0%,18%,100%{transform:scale(0.9);opacity:0;}
+    2%{transform:scale(0.9);opacity:0.5;}
+    16%{transform:scale(1.6);opacity:0;}
+  }
   @keyframes label-focus{
-    0%, 12%, 100%{
-      font-size:13px;
-      color:var(--heading);
-      text-shadow:none;
-      transform:translateY(0);
-    }
-    3%, 10%{
-      font-size:16px;
-      color:#fff;
-      text-shadow:0 0 14px rgba(255,255,255,0.28);
-      transform:translateY(-1px);
-    }
+    0%,18%,100%{font-size:13px;color:var(--heading);text-shadow:none;}
+    4%{font-size:16.5px;color:#fff;text-shadow:0 0 16px rgba(10,125,134,0.35);}
+    14%{font-size:16.5px;color:#fff;text-shadow:0 0 16px rgba(10,125,134,0.35);}
   }
-
   @keyframes text-focus{
-    0%, 12%, 100%{
-      font-size:12.5px;
-      color:var(--text);
-      text-shadow:none;
-    }
-    3%, 10%{
-      font-size:13.5px;
-      color:#fff;
-      text-shadow:0 0 10px rgba(255,255,255,0.18);
-    }
+    0%,18%,100%{font-size:12.5px;color:var(--text);}
+    4%{font-size:14px;color:#fff;}
+    14%{font-size:14px;color:#fff;}
   }
-
   @keyframes dash-flow{
     to{stroke-dashoffset:-400;}
   }
@@ -695,8 +651,8 @@
     .navbar .wrap{height:72px;}
     .nav-links{display:flex;}
     .hero{padding-bottom:64px;}
-    .hero-frame{height:min(48vh, 360px);}
-    .hero-title{margin-top:-32px;padding-bottom:28px;}
+    .hero-frame{max-height:360px;}
+    .hero-title{margin-top:16px;padding-bottom:28px;}
     .hero-title h1{font-size:30px;}
     .hero-cta{margin-top:28px;}
     .feature-grid{grid-template-columns:1fr;}
@@ -714,8 +670,8 @@
     /* Process strip stacks two-per-row on small screens */
     .process-strip{padding:24px 18px 20px;margin-top:32px;}
     .process-track{flex-wrap:wrap;row-gap:28px;}
-    .process-track::before{display:none;}
     .process-step{flex:0 0 50%;padding:0 8px;}
+    .process-step .connector{display:none;}
     .step-icon{width:44px;height:44px;}
     .step-icon svg{width:20px;height:20px;}
     .step-label{font-size:12px;}
@@ -726,7 +682,7 @@
     .reveal{opacity:1;transform:none;transition:none;}
     html{scroll-behavior:auto;}
     .status-dot::after{animation:none;opacity:0;}
-    .process-step, .process-step .step-icon, .process-step .step-icon::after, .process-step .step-label, .process-step .step-text, .process-step .connector::after{
+    .process-step, .process-step .step-icon::after, .process-step .step-label, .process-step .step-text, .process-step .connector::after{
       animation:none;
     }
   }
@@ -755,7 +711,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-video">
-    <iframe id="heroVideoFrame" class="hero-frame" src="../video/video.html" title="Moni.med — animación de la plataforma" loading="lazy" scrolling="no"></iframe>
+    <iframe class="hero-frame" src="video.html" title="Moni.med — animación de la plataforma" loading="lazy" scrolling="no"></iframe>
   </div>
   <div class="wrap hero-content">
     <div class="hero-title">
@@ -782,7 +738,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
           </div>
           <p class="step-label">Preparando</p>
-          <p class="step-text">Validaciones  de <span class="ai-tag">Agentes de IA</span> para validar lotes, vencimientos, etc.</p>
+          <p class="step-text">La <span class="ai-tag">IA</span> valida lote y vencimiento antes de que salga del almacén.</p>
         </div>
         <div class="process-step current">
           <div class="connector"></div>
@@ -790,7 +746,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="10" rx="1"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="5.5" cy="18" r="1.7"/><circle cx="16.5" cy="18" r="1.7"/></svg>
           </div>
           <p class="step-label">En camino</p>
-          <p class="step-text"><span class="ai-tag">Agente de IA</span> que calcula ruta y tiempo estimado en tiempo real.</p>
+          <p class="step-text">La <span class="ai-tag">IA</span> calcula ruta y tiempo estimado en tiempo real.</p>
         </div>
         <div class="process-step">
           <div class="connector"></div>
@@ -798,7 +754,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M7 21v-6h10v6"/><path d="M12 5v6M9 8h6"/></svg>
           </div>
           <p class="step-label">Hospital</p>
-          <p class="step-text"><span class="ai-tag">Agente de IA</span> que cruza lo enviado con lo solicitado, lote por lote.</p>
+          <p class="step-text">La <span class="ai-tag">IA</span> cruza lo enviado con lo solicitado, lote por lote.</p>
         </div>
         <div class="process-step">
           <div class="connector"></div>
@@ -806,13 +762,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9.5"/></svg>
           </div>
           <p class="step-label">Entregado</p>
-          <p class="step-text"><span class="ai-tag">Agente de IA</span> que deja el registro listo para auditorías y glosas.</p>
+          <p class="step-text">La <span class="ai-tag">IA</span> deja el registro listo para auditorías y glosas.</p>
         </div>
       </div>
     </div>
 
     <div class="hero-cta">
-      <p class="hero-ai"></p>
+      <p class="hero-ai">Moni.AI anticipa faltantes y sugiere pedidos con respaldo clínico en tiempo real.</p>
       <a href="https://medu-frontend.vercel.app/login" class="btn btn-primary">Pide tu demo</a>
     </div>
   </div>
@@ -940,7 +896,7 @@
 <footer>
   <div class="wrap">
     <div class="brand">
-      <img class="brand-mark" src="assets/logo_moni_med.jpg" alt="Moni.med">
+      <img class="brand-mark" src="logo_moni.med.png" alt="Moni.med">
       <span class="brand-word">moni.med</span>
     </div>
     <a href="mailto:contacto@moni.med">Contacto</a>
@@ -948,28 +904,6 @@
 </footer>
 
 <script>
-  /* ---------- Hero video loop ---------- */
-  const heroVideoFrame = document.getElementById('heroVideoFrame');
-
-  heroVideoFrame.addEventListener('load', () => {
-    try {
-      const doc = heroVideoFrame.contentDocument;
-      const video = doc && doc.querySelector('video');
-
-      if (video) {
-        video.loop = true;
-        video.play().catch(() => {});
-
-        video.addEventListener('ended', () => {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-        });
-      }
-    } catch (error) {
-      // Cross-origin pages cannot be inspected. The iframe remains functional.
-    }
-  });
-
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
