@@ -124,6 +124,18 @@
     background:var(--turquoise-strong);
     box-shadow:0 8px 24px rgba(10,125,134,0.22);
   }
+  .btn-text-cta{
+    background:none;
+    color:var(--turquoise-strong);
+    padding:0;
+    border-radius:0;
+    font-weight:600;
+    border-bottom:2px solid rgba(10,125,134,0.35);
+    padding-bottom:2px;
+  }
+  .btn-text-cta:hover{
+    border-bottom-color:var(--turquoise-strong);
+  }
   .btn-nav-cta{
     background:var(--turquoise);
     color:#fff;
@@ -265,7 +277,7 @@
     inset:-4px;
     border-radius:50%;
     background:var(--turquoise);
-    animation:status-pulse 1.8s ease-out infinite;
+    opacity:0;
   }
 
   .process-track{
@@ -311,12 +323,7 @@
     background:var(--turquoise-strong);
     box-shadow:0 0 0 4px rgba(14,165,176,0.18);
     opacity:0;
-    animation:travel 10s ease-in-out infinite;
   }
-  .process-step:nth-child(2) .connector::after{animation-delay:-8.4s;}
-  .process-step:nth-child(3) .connector::after{animation-delay:-6.4s;}
-  .process-step:nth-child(4) .connector::after{animation-delay:-4.4s;}
-  .process-step:nth-child(5) .connector::after{animation-delay:-2.4s;}
 
   .step-icon{
     position:relative;
@@ -375,24 +382,6 @@
     color:var(--turquoise-strong);
     font-weight:700;
   }
-
-  /* Focus that cycles through the five steps, in order */
-  .process-step{animation:step-ring 10s ease-in-out infinite;}
-  .process-step::before{animation:card-focus 10s ease-in-out infinite;}
-  .process-step .step-icon{animation:icon-focus 10s ease-in-out infinite;}
-  .process-step .step-icon::after{animation:ring-pulse 10s ease-in-out infinite;}
-  .process-step .step-label{animation:label-focus 10s ease-in-out infinite;}
-  .process-step .step-text{animation:text-focus 10s ease-in-out infinite;}
-  .process-step:nth-child(1) *{animation-delay:0s;}
-  .process-step:nth-child(2) *{animation-delay:-8s;}
-  .process-step:nth-child(3) *{animation-delay:-6s;}
-  .process-step:nth-child(4) *{animation-delay:-4s;}
-  .process-step:nth-child(5) *{animation-delay:-2s;}
-  .process-step:nth-child(1){animation-delay:0s;}
-  .process-step:nth-child(2){animation-delay:-8s;}
-  .process-step:nth-child(3){animation-delay:-6s;}
-  .process-step:nth-child(4){animation-delay:-4s;}
-  .process-step:nth-child(5){animation-delay:-2s;}
 
   @keyframes status-pulse{
     0%{transform:scale(0.7);opacity:0.55;}
@@ -703,7 +692,7 @@
       <span class="brand-word">moni.med</span>
     </div>
     <nav class="nav-links">
-      <a href="https://medu-frontend.vercel.app/login" class="btn-nav-cta">Pide tu demo</a>
+      <a href="https://medu-frontend.vercel.app/login" class="btn btn-text-cta">Pide tu demo</a>
     </nav>
   </div>
 </div>
@@ -769,7 +758,7 @@
 
     <div class="hero-cta">
       <p class="hero-ai">Moni.AI anticipa faltantes y sugiere pedidos con respaldo clínico en tiempo real.</p>
-      <a href="https://medu-frontend.vercel.app/login" class="btn btn-primary">Pide tu demo</a>
+      <a href="https://medu-frontend.vercel.app/login" class="btn btn-text-cta">Pide tu demo</a>
     </div>
   </div>
 </section>
@@ -867,7 +856,7 @@
         <h2>Pide tu demo</h2>
         <p>Agenda 20 minutos con Sofía, cofundadora de Moni.med, y te mostramos cómo se ve la trazabilidad de tus pedidos desde el primer día.</p>
       </div>
-      <a href="https://medu-frontend.vercel.app/login" class="btn btn-primary">Agendar demo</a>
+      <a href="https://medu-frontend.vercel.app/login" class="btn btn-text-cta">Agendar demo</a>
     </div>
   </div>
 </section>
